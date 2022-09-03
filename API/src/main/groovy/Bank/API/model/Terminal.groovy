@@ -22,12 +22,18 @@ class Terminal
     @ManyToMany(mappedBy = "terminals")
     private Set<CustomerProfile> customerProfiles = new HashSet<>()
 
-    //add factory constructor
-    //add getters and setters
     Terminal(x,y)
     {
         this.x = x
         this.y = x
+    }
+
+    //process transaction
+    private void processTransaction(customer, datetime, amount)
+    {
+        //create transaction
+        // update customer profile
+        
     }
 
 

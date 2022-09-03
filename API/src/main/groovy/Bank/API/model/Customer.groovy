@@ -31,16 +31,13 @@ class Customer
         createCustomerProfile()
     }
 
-
-    //add getters and setters
-    String toString()
-    {
-        return firstName
-    }
-
+    // need to fully implement
     private void createCustomerProfile()
     {
         this.CustomerProfile = new CustomerProfile()
     }
+
+
+    //getters and setters
 
 }
