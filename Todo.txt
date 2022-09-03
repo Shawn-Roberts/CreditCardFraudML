@@ -4,4 +4,4 @@ Customer/ Customer Profile -- should I just do FK or an intermediate table (http
 
 CustomerProfile -- should the fields be Longs or Doubles?
 
-
+Other
