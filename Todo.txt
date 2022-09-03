@@ -1,0 +1,7 @@
+Questions to go over:
+
+Customer/ Customer Profile -- should I just do FK or an intermediate table (https://www.baeldung.com/jpa-one-to-one)
+
+CustomerProfile -- should the fields be Longs or Doubles?
+
+

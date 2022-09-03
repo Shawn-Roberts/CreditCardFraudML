@@ -1,0 +1,31 @@
+package Bank.API
+
+
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToOne
+import javax.persistence.CascadeType
+
+@Entity(name = "Terminal")
+class Terminal
+{
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    Long id
+
+    private Double x = 0.0
+    private Double y = 0.0
+
+    //add factory constructor
+    //add getters and setters
+    Terminal(x,y)
+    {
+        this.x = x
+        this.y = x
+    }
+
+
+
+}
