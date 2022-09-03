@@ -7,6 +7,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToOne
 import javax.persistence.CascadeType
+import javax.persistence.ManyToMany;
 
 @Entity(name = "Terminal")
 class Terminal
@@ -17,6 +18,9 @@ class Terminal
 
     private Double x = 0.0
     private Double y = 0.0
+
+    @ManyToMany(mappedBy = "terminals")
+    private Set<CustomerProfile> customerProfiles = new HashSet<>()
 
     //add factory constructor
     //add getters and setters
