@@ -14,11 +14,12 @@ import javax.persistence.JoinTable;
 @Entity(name="CustomerProfile")
 class CustomerProfile
 {
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id
 
-    @OneToOne(mappedBy = "CustomerProfile")
+    @OneToOne(mappedBy = "customerProfile")
     private Customer customer
 
     @OneToMany(mappedBy="customerProfile")
@@ -43,6 +44,12 @@ class CustomerProfile
         // get terminals within 100 grid units
     }
 
+    protected void addNeWTransaction()
+    {
+        
+    }
+
     //getters and setters
+
 
 }

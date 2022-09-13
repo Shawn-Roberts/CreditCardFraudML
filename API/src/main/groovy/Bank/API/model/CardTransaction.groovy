@@ -22,8 +22,8 @@ class CardTransaction
 
     LocalDateTime time 
     Double amount = 0.0
-    Long time_seconds 
-    Long time_days
+    Long time_seconds = 0
+    Long time_days = 0 
 
     //
 

@@ -18,9 +18,9 @@ class Customer
     String lastName
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "CustomerProfile_id", referencedColumnName ="id")
+    @JoinColumn(name = "customerProfile_id", referencedColumnName ="id")
     // will be switching to factory method
-    private CustomerProfile CustomerProfile 
+    private CustomerProfile customerProfile 
 
     // add factory methods
 
@@ -34,7 +34,8 @@ class Customer
     // need to fully implement
     private void createCustomerProfile()
     {
-        this.CustomerProfile = new CustomerProfile()
+        this.customerProfile = new CustomerProfile()
+        this.customerProfile.addNeWTransaction()
     }
 
 

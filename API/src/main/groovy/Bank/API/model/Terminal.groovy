@@ -19,10 +19,16 @@ class Terminal
     private Double x = 0.0
     private Double y = 0.0
 
-    Terminal(x,y)
+    Terminal(String x,String y)
+    {
+        this.x = Double.parseDouble(x)
+        this.y = Double.parseDouble(y)
+    }
+
+    Terminal(Double x, Double y)
     {
         this.x = x
-        this.y = x
+        this.y = y
     }
 
     //process transaction

@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired
 @SpringBootApplication
 class ApiApplication {
 
-	@Autowired
-	CustomerRepository customerRepository
+
+
     @Autowired
-    TerminalRepository terminalRepository
-
-
+    DataLoaderBootstrap dataLoaderBootstrap
 
 	static void main(String[] args) {
 		SpringApplication.run(ApiApplication, args)
@@ -25,6 +23,7 @@ class ApiApplication {
     {
         (args) ->
         {
+            dataLoaderBootstrap.loadData()
         }
     }
 
