@@ -5,7 +5,8 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import java.time.LocalDateTime
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity(name = "CardTransaction")
 class CardTransaction
@@ -14,14 +15,15 @@ class CardTransaction
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id
 
+    @ManyToOne
+    @JoinColumn(name="customerProfile_id", nullable= false)
+    private CustomerProfile customerProfile
+
 
     LocalDateTime time 
     Double amount = 0.0
     Long time_seconds 
     Long time_days
-
-    @ManyToMany(mappedBy = "transactions")
-    private Set<CustomerProfile> customerProfiles = new HashSet<>()
 
     //
 

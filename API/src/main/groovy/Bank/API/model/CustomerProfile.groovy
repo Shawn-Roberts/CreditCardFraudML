@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToOne
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.CascadeType
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,30 +21,15 @@ class CustomerProfile
     @OneToOne(mappedBy = "CustomerProfile")
     private Customer customer
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "CustomerProfile_Terminal",
-        joinColumns = @JoinColumn(name = "profile_id"), 
-        inverseJoinColumns = @JoinColumn(name = "terminal_id")
-    )
-    private Set<Terminal> terminals = new HashSet<>()
+    @OneToMany(mappedBy="customerProfile")
+    private Set<CardTransaction> transactions;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "CustomerProfile_Transactions",
-        joinColumns = @JoinColumn(name = "profile_id"), 
-        inverseJoinColumns = @JoinColumn(name = "transaction_id")
-    )
-    private Set<CardTransaction> transactions = new HashSet<>()
-
-
-
-    
     private Double x = 0.0
     private Double y = 0.0
     private Double stdAmount = 0.0
     private Double meanAmount = 0.0
     private Double meanNumberOfTransactionsPerDay = 0.0
+
 
     //update profile based on transactions
     private void updateProfile()

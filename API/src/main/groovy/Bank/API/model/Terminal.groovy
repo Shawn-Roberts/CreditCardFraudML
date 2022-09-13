@@ -19,9 +19,6 @@ class Terminal
     private Double x = 0.0
     private Double y = 0.0
 
-    @ManyToMany(mappedBy = "terminals")
-    private Set<CustomerProfile> customerProfiles = new HashSet<>()
-
     Terminal(x,y)
     {
         this.x = x
