@@ -17,9 +17,9 @@ import java.nio.file.Paths
 @Component
 class DataLoaderBootstrap
 {
-    private static final String customerProfileCSV = "./sampleData/customers.csv";
-    private static final String terminalCSV = "./sampleData/terminals.csv";
-    private static final String terminalCSV = "./sampleData/transactions.csv";
+    private static final String customerProfileCSV = "./sampleData/customers.csv"
+    private static final String terminalCSV = "./sampleData/terminals.csv"
+    private static final String transactionsCSV = "./sampleData/transactions.csv"
 
     @Autowired
     CustomerRepository customerRepository
