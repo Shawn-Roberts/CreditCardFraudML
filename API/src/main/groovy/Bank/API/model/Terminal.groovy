@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 class Terminal
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     Long id
 
     private Double x = 0.0

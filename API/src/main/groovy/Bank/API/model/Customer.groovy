@@ -12,7 +12,7 @@ import javax.persistence.CascadeType
 class Customer
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     Long id
     String firstName
     String lastName
@@ -28,17 +28,15 @@ class Customer
     {
         this.firstName = firstName
         this.lastName = lastName
-        createCustomerProfile()
     }
 
     // need to fully implement
     private void createCustomerProfile()
     {
-        this.customerProfile = new CustomerProfile()
-        this.customerProfile.addNeWTransaction()
+
     }
 
-
     //getters and setters
+    public CustomerProfile getCustomerProfile(){}
 
 }

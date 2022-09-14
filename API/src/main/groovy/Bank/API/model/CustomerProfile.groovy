@@ -10,7 +10,6 @@ import javax.persistence.CascadeType
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
-
 @Entity(name="CustomerProfile")
 class CustomerProfile
 {
@@ -22,14 +21,17 @@ class CustomerProfile
     @OneToOne(mappedBy = "customerProfile")
     private Customer customer
 
-    @OneToMany(mappedBy="customerProfile")
-    private Set<CardTransaction> transactions;
+    // @OneToMany(mappedBy="customerProfile")
+    // private Set<CardTransaction> transactions = new HashSet<>()
 
     private Double x = 0.0
     private Double y = 0.0
     private Double stdAmount = 0.0
     private Double meanAmount = 0.0
     private Double meanNumberOfTransactionsPerDay = 0.0
+
+    //constructor
+    CustomerProfile(){}
 
 
     //update profile based on transactions
@@ -44,12 +46,17 @@ class CustomerProfile
         // get terminals within 100 grid units
     }
 
-    protected void addNeWTransaction()
-    {
-        
-    }
 
     //getters and setters
-
-
+    public Double getX(){}
+    public void setX(){}
+    public Double getY(){}
+    public void setY(){}
+    public Double getStdAmount(){}
+    public void setStdAmount(){}
+    public Double getMeanAmount(){}
+    public void setMeanAmount(){}
+    public Double getMeanNumberOfTransactionsPerDay(){}
+    public void setMeanNumberOfTransactionsPerDay(){}
+    
 }

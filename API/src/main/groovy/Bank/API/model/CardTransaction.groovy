@@ -15,9 +15,9 @@ class CardTransaction
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id
 
-    @ManyToOne
-    @JoinColumn(name="customerProfile_id", nullable= false)
-    private CustomerProfile customerProfile
+    // @ManyToOne
+    // @JoinColumn(name="customerProfile_id", nullable= false)
+    // private CustomerProfile customerProfile
 
 
     LocalDateTime time 
