@@ -33,6 +33,15 @@ class CustomerProfile
     //constructor
     CustomerProfile(){}
 
+    CustomerProfile(x,y,stdAmount,meanAmount,meanNumberOfTransactionsPerDay)
+    {
+        this.x = x
+        this.y = y
+        this.stdAmount = stdAmount
+        this.meanAmount = meanAmount
+        this.meanNumberOfTransactionsPerDay = meanNumberOfTransactionsPerDay
+    }
+
 
     //update profile based on transactions
     private void updateProfile()
@@ -48,15 +57,9 @@ class CustomerProfile
 
 
     //getters and setters
-    public Double getX(){}
-    public void setX(){}
-    public Double getY(){}
-    public void setY(){}
-    public Double getStdAmount(){}
-    public void setStdAmount(){}
-    public Double getMeanAmount(){}
-    public void setMeanAmount(){}
-    public Double getMeanNumberOfTransactionsPerDay(){}
-    public void setMeanNumberOfTransactionsPerDay(){}
+    Double getX()
+    {
+        return this.x
+    }
     
 }

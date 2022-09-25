@@ -20,14 +20,15 @@ class Customer
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "customerProfile_id", referencedColumnName ="id")
     // will be switching to factory method
-    private CustomerProfile customerProfile 
+    private CustomerProfile customerProfile = new CustomerProfile()
 
     // add factory methods
 
-    Customer(firstName,lastName)
+    Customer(firstName,lastName, customerProfile)
     {
         this.firstName = firstName
         this.lastName = lastName
+        this.customerProfile = customerProfile
     }
 
     // need to fully implement
