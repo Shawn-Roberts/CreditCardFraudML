@@ -39,11 +39,21 @@ class DataLoaderBootstrap
 
         def customerCSV = new File(customerCSV)
         def cutsomterProfileCSV = new File(customerProfileCSV)
+        def terminalCSV = new File(terminalCSV)
         def customerContent = customerCSV.getText('utf-8')
         def customerProfileContent = cutsomterProfileCSV.getText('utf-8')
-        try(customerIterator = parseCsv(customerContent, separator: ',', readFirstLine: false)
-            customerProfileIterator = parseCsv(customerProfileContent, separator: ',', readFirstLine: false))
+        def terminalContent = terminalCSV.getText('utf-8')
+
+        try(
+            customerIterator = parseCsv(customerContent, separator: ',', readFirstLine: false)
+            customerProfileIterator = parseCsv(customerProfileContent, separator: ',', readFirstLine: false)
+            terminalIterator = parseCsv(terminalContent, separator: ',', readFirstLine: false))
         {
+            while (terminalIterator.hasNext())
+            {
+                createTerminal(terminalIterator.next().toMap())
+            }
+
             while(customerIterator.hasNext())
             {
                 if(customerProfileIterator.hasNext())
@@ -58,8 +68,6 @@ class DataLoaderBootstrap
                 }
 
             }
-
-
 
         }
         catch(IOException e)
@@ -110,11 +118,10 @@ class DataLoaderBootstrap
 
     }
 
-    private Terminal createTerminal(CSVRecord terminalRecord)
+    private Terminal createTerminal(HashMap<String,String> terminalRecord)
     {
-        Terminal t = new Terminal(terminalRecord.get(1),terminalRecord.get(2))
+        Terminal t = new Terminal(terminalRecord.get("x"),terminalRecord.get("y"))
         terminalRepository.save(t)
-
     }
 }
 

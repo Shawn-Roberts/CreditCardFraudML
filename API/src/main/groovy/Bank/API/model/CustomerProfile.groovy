@@ -5,10 +5,13 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToOne
-import javax.persistence.OneToMany;
+import javax.persistence.OneToMany
 import javax.persistence.CascadeType
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+
+
 
 @Entity(name="CustomerProfile")
 class CustomerProfile
@@ -21,8 +24,16 @@ class CustomerProfile
     @OneToOne(mappedBy = "customerProfile")
     private Customer customer
 
-    // @OneToMany(mappedBy="customerProfile")
-    // private Set<CardTransaction> transactions = new HashSet<>()
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customerProfile_Terminals", 
+      joinColumns = @JoinColumn(name = "terminal_id", referencedColumnName = "id"), 
+      inverseJoinColumns = @JoinColumn(name = "customerProfile_id", 
+      referencedColumnName = "id"))
+    private List<Terminal> terminals
+
+
+
+
 
     private Double x = 0.0
     private Double y = 0.0
@@ -50,6 +61,11 @@ class CustomerProfile
     }
 
     //link to terminals
+    void addTerminal(Terminal t)
+    {
+        this.terminals.add(t)
+    }
+
     private void getTerminalsWithin100GridUnits()
     {
         // get terminals within 100 grid units
