@@ -21,6 +21,8 @@ class Terminal
     private Double x = 0.0
     private Double y = 0.0
 
+    Terminal(){}
+
     Terminal(String x,String y)
     {
         this.x = Double.parseDouble(x)

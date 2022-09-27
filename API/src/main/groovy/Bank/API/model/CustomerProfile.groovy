@@ -24,12 +24,15 @@ class CustomerProfile
     @OneToOne(mappedBy = "customerProfile")
     private Customer customer
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "customerProfile_Terminals", 
       joinColumns = @JoinColumn(name = "terminal_id", referencedColumnName = "id"), 
       inverseJoinColumns = @JoinColumn(name = "customerProfile_id", 
       referencedColumnName = "id"))
     private List<Terminal> terminals
+
+    @OneToMany(mappedBy="customerProfile")
+    private Set<CardTransaction> transactions;
 
 
 
@@ -61,9 +64,9 @@ class CustomerProfile
     }
 
     //link to terminals
-    void addTerminal(Terminal t)
+    void addTerminals(List<Terminal> terminalList)
     {
-        this.terminals.add(t)
+        this.terminals = terminalList
     }
 
     private void getTerminalsWithin100GridUnits()

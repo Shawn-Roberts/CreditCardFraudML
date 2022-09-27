@@ -15,7 +15,6 @@ import java.io.Reader
 import java.nio.file.Files
 import java.nio.file.Paths
 
-
 @Component
 class DataLoaderBootstrap
 {
@@ -34,39 +33,49 @@ class DataLoaderBootstrap
     @Autowired
     TerminalRepository terminalRepository
 
+    @Autowired 
+    CardTransactionRepository cardTransactionRepository
+
     void loadData()
     {
 
-        def customerCSV = new File(customerCSV)
-        def cutsomterProfileCSV = new File(customerProfileCSV)
-        def terminalCSV = new File(terminalCSV)
+        File customerCSV = new File(customerCSV)
+        File cutsomterProfileCSV = new File(customerProfileCSV)
+        File terminalCSV = new File(terminalCSV)
+        File  transactionCSV = new File (transactionCSV)
         def customerContent = customerCSV.getText('utf-8')
         def customerProfileContent = cutsomterProfileCSV.getText('utf-8')
         def terminalContent = terminalCSV.getText('utf-8')
+        def transactionContent = transactionCSV.getText('utf-8')
 
         try(
             customerIterator = parseCsv(customerContent, separator: ',', readFirstLine: false)
             customerProfileIterator = parseCsv(customerProfileContent, separator: ',', readFirstLine: false)
-            terminalIterator = parseCsv(terminalContent, separator: ',', readFirstLine: false))
+            terminalIterator = parseCsv(terminalContent, separator: ',', readFirstLine: false)
+            transactionIterator = parseCsv(transactionContent, separator: ',', readFirstLine: false))
         {
-            while (terminalIterator.hasNext())
+            // while (terminalIterator.hasNext())
+            // {
+            //     createTerminal(terminalIterator.next().toMap())
+            // }
+
+            // while(customerIterator.hasNext())
+            // {
+            //     if(customerProfileIterator.hasNext())
+            //     {  
+            //         CustomerProfile temp = createCustomerProfile(customerProfileIterator.next().toMap())
+            //         createCustomer(customerIterator.next().toMap(), temp)
+
+            //     }
+            //     else
+            //     {
+            //         createCustomer(customerIterator.next().toMap())
+            //     }
+
+            // }
+            while (transactionIterator.hasNext())
             {
-                createTerminal(terminalIterator.next().toMap())
-            }
-
-            while(customerIterator.hasNext())
-            {
-                if(customerProfileIterator.hasNext())
-                {  
-                    CustomerProfile temp = createCustomerProfile(customerProfileIterator.next().toMap())
-                    createCustomer(customerIterator.next().toMap(), temp)
-
-                }
-                else
-                {
-                    createCustomer(customerIterator.next().toMap())
-                }
-
+                createTransaction(transactionIterator.next().toMap())
             }
 
         }
@@ -102,7 +111,6 @@ class DataLoaderBootstrap
     {
         Customer c = new Customer(customerRecord.get("firstname"),customerRecord.get("lastname"))
         customerRepository.save(c)
-        //need to get profile and feed in any transactions belonging to that account
 
     }
 
@@ -111,11 +119,9 @@ class DataLoaderBootstrap
         CustomerProfile cp = new CustomerProfile(Double.parseDouble(customerProfileRecord.get("x")),
         Double.parseDouble(customerProfileRecord.get("y")),Double.parseDouble(customerProfileRecord.get("mean_amount")),
         Double.parseDouble(customerProfileRecord.get("std_amount")),Double.parseDouble(customerProfileRecord.get("mean_nb_tx_per_day")))
-
+        cp.addTerminals(getTerminalsForCustomerProfile(customerProfileRecord.get("available_terminals")))
         return cp
-        // customerProfileRepository.save(cp)
         
-
     }
 
     private Terminal createTerminal(HashMap<String,String> terminalRecord)
@@ -123,19 +129,25 @@ class DataLoaderBootstrap
         Terminal t = new Terminal(terminalRecord.get("x"),terminalRecord.get("y"))
         terminalRepository.save(t)
     }
+
+    private List<Terminal> getTerminalsForCustomerProfile(String terminalIds)
+    {
+        List<Terminal> terminalList = new ArrayList<Terminal>()
+        String[] terminalIdsProcessed = terminalIds.substring(1, terminalIds.length() - 1).split(",")
+
+        terminalIdsProcessed.each{terminalId -> 
+            Optional<Terminal> t = terminalRepository.findById(new Long(terminalId))
+            if(t.isPresent())
+            {
+                terminalList.add(t.get())
+            }
+        }
+        return terminalList
+
+    }
+
+    private void createTransaction(HashMap<String,String> transactionRecord)
+    {
+
+    }
 }
-
-
-            // BufferedReader customerReader = Files.newBufferedReader(Paths.get(customerCSV))
-            // CSVParser customerCsvParser = new CSVParser(customerReader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
-
-            // BufferedReader customerProfileReader = Files.newBufferedReader(Paths.get(customerProfileCSV))
-            // CSVParser customerProfileCsvParser = new CSVParser(customerProfileReader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
-
-
-            // for(CSVRecord customerRecord: customerCsvParser)
-            // {
-            //     CustomerProfile cp = createCustomerProfile(customerProfileCsvParser.readNext())
-            //     println(cp)
-            //     // createCustomer(customerRecord)
-            // }
